@@ -1,0 +1,41 @@
+questions:
+  - variable: user.name
+    label: "SSH Username"
+    description: "사용자가 SSH로 로그인할 이름"
+    type: string
+    required: true
+    default: "student"
+
+  - variable: user.password
+    label: "SSH Password"
+    description: "SSH 접속 비밀번호"
+    type: password
+    required: true
+
+  - variable: gpu.enabled
+    label: "GPU 사용 여부"
+    description: "GPU를 사용할지 선택"
+    type: boolean
+    default: false
+
+  - variable: gpu.count
+    label: "GPU 개수"
+    type: int
+    required: false
+    default: 1
+
+  - variable: storage.enabled
+    label: "스토리지(PVC) 활성화"
+    type: boolean
+    default: false
+
+  - variable: storage.size
+    label: "스토리지 용량"
+    type: string
+    default: "10Gi"
+
+  - variable: ssh.port
+    label: "SSH 포트"
+    type: int
+    default: 2222
+

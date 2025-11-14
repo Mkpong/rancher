@@ -1,0 +1,7 @@
+apiVersion: v2
+name: ssh-ubuntu
+description: SSH-enabled Ubuntu container with LoadBalancer and optional GPU
+type: application
+version: 0.1.0
+appVersion: "1.0"
+

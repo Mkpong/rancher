@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "ssh-ubuntu.fullname" . }}
+  labels:
+    app: {{ include "ssh-ubuntu.name" . }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ include "ssh-ubuntu.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "ssh-ubuntu.name" . }}
+    spec:
+      containers:
+      - name: ssh-ubuntu
+        image: lscr.io/linuxserver/openssh-server:latest
+        env:
+        - name: PUID
+          value: "{{ .Values.user.uid }}"
+        - name: PGID
+          value: "{{ .Values.user.gid }}"
+        - name: TZ
+          value: "Asia/Seoul"
+        - name: PASSWORD_ACCESS
+          value: "true"
+        - name: USER_NAME
+          value: "{{ .Values.user.name }}"
+        - name: USER_PASSWORD
+          value: "{{ .Values.user.password }}"
+        ports:
+        - containerPort: {{ .Values.ssh.port }}
+        resources:
+          limits:
+            {{- if .Values.gpu.enabled }}
+            nvidia.com/gpu: {{ .Values.gpu.count }}
+            {{- end }}
+        volumeMounts:
+        {{- if .Values.storage.enabled }}
+        - name: homedir
+          mountPath: /home/{{ .Values.user.name }}
+        {{- end }}
+
+      volumes:
+      {{- if .Values.storage.enabled }}
+      - name: homedir
+        persistentVolumeClaim:
+          claimName: {{ include "ssh-ubuntu.fullname" . }}-pvc
+      {{- end }}
+

@@ -1,0 +1,17 @@
+user:
+  name: "student"
+  password: "Passw0rd!"
+  uid: 1000
+  gid: 1000
+
+ssh:
+  port: 2222
+
+gpu:
+  enabled: true
+  count: 1
+
+storage:
+  enabled: true
+  size: 10Gi
+

@@ -39,3 +39,26 @@ questions:
     type: int
     default: 2222
 
+- variable: resources.requests.cpu
+  label: "CPU Request"
+  type: string
+  default: "2"
+
+- variable: resources.requests.memory
+  label: "Memory Request"
+  type: string
+  default: "1Gi"
+
+- variable: resources.limits.cpu
+  label: "CPU Limit"
+  type: string
+  default: "4"
+
+- variable: resources.limits.memory
+  label: "Memory Limit"
+  type: string
+  default: "2Gi"
+
+
+
+

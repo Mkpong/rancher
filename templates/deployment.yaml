@@ -33,7 +33,12 @@ spec:
         ports:
         - containerPort: {{ .Values.ssh.port }}
         resources:
+          requests:
+            cpu: {{ .Values.resources.requests.cpu | quote }}
+            memory: {{ .Values.resources.requests.memory | quote }}
           limits:
+            cpu: {{ .Values.resources.limits.cpu | quote }}
+            memory: {{ .Values.resources.limits.memory | quote }}
             {{- if .Values.gpu.enabled }}
             nvidia.com/gpu: {{ .Values.gpu.count }}
             {{- end }}
